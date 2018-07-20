@@ -7,3 +7,6 @@ Search anything on Google without captcha
 
 # Review
 ![LINE](https://image.prntscr.com/image/-B2GJzkJQGCqF8xOWOJ8OA.png)
+
+# Special Thanks
+Special Thanks To Teguh Aprianto (https://www.facebook.com/Teguhmicro)
