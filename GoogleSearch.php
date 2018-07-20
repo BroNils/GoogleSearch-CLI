@@ -2,7 +2,7 @@
 /* GoogleSearch.php (CLI Only)
 
 | Author		: Muhammad Rakha Firjatullah
-| Version		: 1.0 RELEASE
+| Version		: 1.1 RELEASE
 | 
 | Email			: nonstop.hacking.free@gmail.com
 | Github		: https://github.com/GoogleX133
@@ -139,6 +139,6 @@ class GoogleSearch {
 
 $lib = new GoogleSearch();
 
-cli_set_process_title("GoogleSearch V.1.0");
+cli_set_process_title("GoogleSearch V.1.1");
 $lib->mainMenu();
 ?>
