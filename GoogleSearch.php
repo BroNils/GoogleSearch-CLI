@@ -7,6 +7,7 @@
 | Email			: nonstop.hacking.free@gmail.com
 | Github		: https://github.com/GoogleX133
 
+BIG THANKS TO Teguh Aprianto (https://www.facebook.com/Teguhmicro)
 */
 
 class GoogleSearch {
@@ -131,7 +132,7 @@ class GoogleSearch {
 			$this->searchMenu();
 		}elseif($getui == 2){
 			$this->settingsMenu();
-		}
+		}else{echo "?";exit();}
 	}
 }
 
