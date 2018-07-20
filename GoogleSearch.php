@@ -13,7 +13,7 @@ BIG THANKS TO Teguh Aprianto (https://www.facebook.com/Teguhmicro)
 class GoogleSearch {
 	
 	public $results;
-	/* kalau ganti pengaturan jangan sampai salah/tertukar tipe-nya (boolean atau string) */
+	/* GSC-CLI Configuration */
 	public $settings = array(
 		"allPagesOutput" => true, // true | false (if false, will only show the first page results)
 		"showTitle" => true, // true | false
