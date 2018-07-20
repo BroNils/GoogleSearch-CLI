@@ -124,6 +124,7 @@ class GoogleSearch {
 		$this->search($getui);
 		$this->showResult($this->results);
 		$this->waitForUserInput("\n\n>>> Press any key to go back to the main menu !","custom");
+		$this->mainMenu();
 	}
 	
 	public function mainMenu(){
