@@ -49,7 +49,8 @@ class GoogleSearch {
 	
 	function changeSettings($settings){
 		foreach($settings as $key => $item){
-			if(array_key_exists($key,$this->settings)){$this->settings[$key] = (stristr($item, "true") !== false || stristr($item, "false") !== false) ? (bool)$item : $item;}
+			$item = preg_replace("/(false)/mi","0",$item);
+			if(array_key_exists($key,$this->settings)){$this->settings[$key] = (preg_match('/(true)|(0)/', $item)) ? (bool)$item : $item;}
 		}
 	}
 	
