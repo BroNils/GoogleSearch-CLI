@@ -123,7 +123,7 @@ class GoogleSearch {
 		echo "\n[!] Please Wait.....";
 		$this->search($getui);
 		$this->showResult($this->results);
-		$this->waitForUserInput("\n\n>>> Press any key to go back to the main menu !","custom");
+		$this->waitForUserInput("\n\n>>> Press ENTER to go back to the main menu !","custom");
 		$this->mainMenu();
 	}
 	
