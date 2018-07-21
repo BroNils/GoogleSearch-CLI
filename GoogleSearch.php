@@ -2,7 +2,7 @@
 /* GoogleSearch.php (CLI Only)
 
 | Author		: Muhammad Rakha Firjatullah
-| Version		: 1.1 RELEASE
+| Version		: 1.2 RELEASE
 | 
 | Email			: nonstop.hacking.free@gmail.com
 | Github		: https://github.com/GoogleX133
@@ -13,7 +13,7 @@ BIG THANKS TO Teguh Aprianto (https://www.facebook.com/Teguhmicro)
 class GoogleSearch {
 	
 	public $results;
-	/* GSC-CLI Configuration */
+	/* kalau ganti pengaturan jangan sampai salah/tertukar tipe-nya (boolean atau string) */
 	public $settings = array(
 		"allPagesOutput" => true, // true | false (if false, will only show the first page results)
 		"showTitle" => true, // true | false
@@ -49,7 +49,7 @@ class GoogleSearch {
 	
 	function changeSettings($settings){
 		foreach($settings as $key => $item){
-			if(array_key_exists($key,$this->settings)){$this->settings[$key] = $item;}
+			if(array_key_exists($key,$this->settings)){$this->settings[$key] = (stristr($item, "true") !== false || stristr($item, "false") !== false) ? (bool)$item : $item;}
 		}
 	}
 	
@@ -123,7 +123,7 @@ class GoogleSearch {
 		echo "\n[!] Please Wait.....";
 		$this->search($getui);
 		$this->showResult($this->results);
-		$this->waitForUserInput("\n\n>>> Press ENTER to go back to the main menu !","custom");
+		$this->waitForUserInput("\n\n>>> Press enter to go back to the main menu !","custom");
 		$this->mainMenu();
 	}
 	
@@ -139,6 +139,6 @@ class GoogleSearch {
 
 $lib = new GoogleSearch();
 
-cli_set_process_title("GoogleSearch V.1.1");
+cli_set_process_title("GoogleSearch V.1.2");
 $lib->mainMenu();
 ?>
