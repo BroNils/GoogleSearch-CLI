@@ -2,7 +2,7 @@
 /* GoogleSearch.php (CLI Only)
 
 | Author		: Muhammad Rakha Firjatullah
-| Version		: 1.2 RELEASE
+| Version		: 2.0 RELEASE
 | 
 | Email			: nonstop.hacking.free@gmail.com
 | Github		: https://github.com/GoogleX133
@@ -25,10 +25,30 @@ class GoogleSearch {
 	);
 	
 	/* utility */
+	function getToken(){
+		$groups = [];
+		$base_url = "https://cse.google.com/cse.js?cx=partner-pub-2698861478625135:3033704849";
+		preg_match_all("/cse_token\":.*?\"(.*?)\"/mi", file_get_contents($base_url), $matches, PREG_SET_ORDER, 0);
+		
+		if(empty($matches)){
+			echo "Err...";exit();
+		}
+		$full = $matches;
+				
+		for($i = 0; $i<count($matches); $i++){
+			if(!empty($matches[$i][1])) array_push($groups,$matches[$i][1]);
+		}
+				
+		return array($full,$groups);
+	}
+	
 	function search($query){
-		$searchSite;
 		$pages = [];
-		$base_url = "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&num=10&hl=en&start={page_no}&cx=partner-pub-2698861478625135:3033704849&cse_tok=AF14hlgzuKg572zAVU4KcBDcWNoTAuMJsA:1532103127571&q={query}";
+		$cseToken = $this->getToken();
+		if(!$cseToken[0]){
+			echo "\n[!] Error, can't get token";exit();
+		}
+		$base_url = "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&num=10&hl=en&start={page_no}&cx=partner-pub-2698861478625135:3033704849&cse_tok=".$cseToken[1][0]."&q={query}";
 		
 		$temporary_url = str_replace("{query}",urlencode($query),$base_url);
 		$res = json_decode(file_get_contents(str_replace("{page_no}","0",$temporary_url)));
@@ -140,6 +160,6 @@ class GoogleSearch {
 
 $lib = new GoogleSearch();
 
-cli_set_process_title("GoogleSearch V.1.2");
+cli_set_process_title("GoogleSearch V.2.0");
 $lib->mainMenu();
 ?>
