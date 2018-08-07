@@ -10,3 +10,7 @@ Search anything on Google without captcha
 
 # Special Thanks
 Special Thanks To Teguh Aprianto (https://www.facebook.com/Teguhmicro)
+
+# More Information
+Alternative cx / cse code (If the Default one isn't work), But this one bellow is only takes 10K query per-day<br>
+`cx=015050873726381757316:8jbkip1m_6w`
