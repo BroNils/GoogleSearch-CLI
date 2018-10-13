@@ -2,7 +2,7 @@
 /* GoogleSearch.php (CLI Only)
 
 | Author		: Muhammad Rakha Firjatullah
-| Version		: 2.0 RELEASE
+| Version		: 2.1 RELEASE
 | 
 | Email			: nonstop.hacking.free@gmail.com
 | Github		: https://github.com/GoogleX133
@@ -25,6 +25,15 @@ class GoogleSearch {
 	);
 	
 	/* utility */
+	function ambilKata($param, $kata1, $kata2){
+		if(strpos($param, $kata1) === FALSE) return FALSE;
+		if(strpos($param, $kata2) === FALSE) return FALSE;
+		$start = strpos($param, $kata1) + strlen($kata1);
+		$end = strrpos($param, $kata2, $start);
+		$return = substr($param, $start, $end - $start);
+		return $return;
+	}
+	
 	function getToken(){
 		$groups = [];
 		$base_url = "https://cse.google.com/cse.js?cx=partner-pub-2698861478625135:3033704849";
@@ -48,10 +57,11 @@ class GoogleSearch {
 		if(!$cseToken[0]){
 			echo "\n[!] Error, can't get token";exit();
 		}
-		$base_url = "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&num=10&hl=en&start={page_no}&cx=partner-pub-2698861478625135:3033704849&cse_tok=".$cseToken[1][0]."&q={query}";
+		$base_url = "https://cse.google.com/cse/element/v1?num=10&hl=en&cx=partner-pub-2698861478625135:3033704849&safe=off&cse_tok=".$cseToken[1][0]."&start={page_no}&q={query}&callback=x";
 		
 		$temporary_url = str_replace("{query}",urlencode($query),$base_url);
-		$res = json_decode(file_get_contents(str_replace("{page_no}","0",$temporary_url)));
+		$clearCB = $this->ambilKata(file_get_contents(str_replace("{page_no}","0",$temporary_url)), "x(",');');
+		$res = json_decode($clearCB);
 		if($this->settings['allPagesOutput']){
 			$this->results = [];
 			for($i = 0; $i<count($res->cursor->pages); $i++){
@@ -59,7 +69,9 @@ class GoogleSearch {
 			}
 			
 			for($i = 0; $i<count($pages); $i++){
-				$res = json_decode(file_get_contents(str_replace("{page_no}",$pages[$i],$temporary_url)));
+				$clearCB = $this->ambilKata(file_get_contents(str_replace("{page_no}",$pages[$i],$temporary_url)), "x(",');');
+				$res = json_decode($clearCB);
+				file_put_contents('GoogleSearch-'.$i.'.txt', $clearCB);
 				for($iix = 0; $iix<count($res->results); $iix++){
 					array_push($this->results,$res->results[$iix]);
 				}
@@ -160,6 +172,6 @@ class GoogleSearch {
 
 $lib = new GoogleSearch();
 
-cli_set_process_title("GoogleSearch V.2.0");
+cli_set_process_title("GoogleSearch V.2.1");
 $lib->mainMenu();
 ?>
