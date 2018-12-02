@@ -2,7 +2,7 @@
 /* GoogleSearch.php (CLI Only)
 
 | Author		: Muhammad Rakha Firjatullah
-| Version		: 2.1 RELEASE
+| Version		: 2.2 RELEASE
 | 
 | Email			: nonstop.hacking.free@gmail.com
 | Github		: https://github.com/GoogleX133
@@ -71,7 +71,6 @@ class GoogleSearch {
 			for($i = 0; $i<count($pages); $i++){
 				$clearCB = $this->ambilKata(file_get_contents(str_replace("{page_no}",$pages[$i],$temporary_url)), "x(",');');
 				$res = json_decode($clearCB);
-				file_put_contents('GoogleSearch-'.$i.'.txt', $clearCB);
 				for($iix = 0; $iix<count($res->results); $iix++){
 					array_push($this->results,$res->results[$iix]);
 				}
@@ -172,6 +171,6 @@ class GoogleSearch {
 
 $lib = new GoogleSearch();
 
-cli_set_process_title("GoogleSearch V.2.1");
+cli_set_process_title("GoogleSearch V.2.2");
 $lib->mainMenu();
 ?>
